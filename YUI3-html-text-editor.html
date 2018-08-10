@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>Proper with YUI &ndash; Test</title>
+</head>
+
+<body>
+  <p id="buttons">
+    <button id="code">Code</button>
+    <button id="em">Em</button>
+    <button id="strong">Strong</button>
+  </p>
+  
+  <textarea id="editor"></textarea>
+  <script src="http://yui.yahooapis.com/3.4.0/build/yui/yui-min.js"></script>
+  <script>
+    YUI().use('editor', function (Y) {
+      var editor = new Y.EditorBase({
+        content: 'Dies ist <em>ein</em> Test <strong>von</strong> YUI\'s <code>EditorBase</code>.',
+        extracss: 'code { border: 1px solid #aaa; background: #eee; font-family: monospace; }'
+      });
+      
+      function wrapWith(tag) {
+        return function () {
+          var inst = this.getInstance();
+          var selection = new inst.Selection();
+          console.log('wrapWith: '+tag);
+          if (!selection.isCollapsed) {
+            selection.wrapContent(tag);
+          } else {
+            selection.insertContent('<'+tag+'></'+tag+'>');
+          }
+        };
+      }
+      Y.mix(Y.Plugin.ExecCommand.COMMANDS, {
+        code: wrapWith('code'),
+        em: wrapWith('em'),
+        strong: wrapWith('strong')
+      });
+      
+      editor.render('#editor');
+      
+      Y.delegate('click', function (event) {
+        var command = event.target.get('id');
+        editor.execCommand(command);
+        editor.focus();
+      }, '#buttons', 'button');
+    });
+  </script>
+</body>
+
+</html>
