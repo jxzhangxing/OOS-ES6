@@ -28,9 +28,16 @@ PI > 3.0;
   
 catName("Tiger");
 
+// Function Declaration - can be hoisted
 function catName(name) {
   console.log("My cat's name is " + name);
 }
+
+// Function Exception - can not be hoisted
+const catName2 = function catName2(name) {
+  console.log("My cat's name is " + name);
+};
+
 /*
 The result of the code above is: "My cat's name is Tiger"
 */
