@@ -69,6 +69,7 @@ module.exports = Circle;
 
 /* index.js */
 import {Circle} from './circle.js';
+import {Circle} from './circle'; // do not need .js if using a bundle
 
 const c = new Circle(10);
 c.draw();
