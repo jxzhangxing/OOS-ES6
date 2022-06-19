@@ -1,0 +1,56 @@
+ES6 TOOLING
+
+Transpiler - Translator + Compiler : Convert Modern JS to ES5 so that all browser can understand 
+* Babel
+
+Bundler - Combining all js to a single bundle.js
+* WebPack
+
+* Babel
+Install node
+>node -v
+>mkdir es6-tooling
+>npm init --yes
+>npm i babel-cli@6.26.0 babel-core@6.26.0 babel-preset-env@1.6.1 --save-dev 
+--save-dev means development dependency not part of app, not deploy to production 
+>code.
+
+in package.json
+"scripts"{
+    "babel": "babel --presets env index.js -o build/index.js"
+}
+>npm run babel // will run "babel --presets env index.js -o build/index.js" in terminal
+
+* WebPack
+>npm i -g webpack-cli@2.0.14
+>webpack-cli init
+? will your application haveb multiple bundles? No
+? which module will be the first to enter the application[example: './src/index'] ./src/index
+? which folder will you generated bundles be in? [default: dist]: 
+? Are you going to use this in production? No
+? Will you be using ES2015? (Y/n) Y -> will auto download babel and other tools we need
+? Will you use one of the below CSS solutions (Use arrow keys)
+> SASS
+> LESS
+> CSS
+> PostCSS
+> No ✓
+? If you want to bundle your CSS files, what will you name the bundle? (press enter to skip)
+? Name your 'webpack.[name].js' [default: 'config']:
+.......installing
++ webpack-cli
++ uglifyjs-webpack-plugin
++ babel-core
++ babel-loader: plugin of webpack to use babel to transpile files
++ babel-preset-env
++ webpack
+
+in package.json
+"scripts"{
+    <!-- "build": "webpack" -->
+    "build": "webpack -w" // -w: watch
+}
+>npm run build
+
+in index.html 
+<script src="dist/main.bundle.js"></script>
